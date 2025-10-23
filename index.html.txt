@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agenda de Personal</title>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.9/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login">
+    <h2>Ingreso</h2>
+    <select id="usuario">
+      <option value="coordinadora">Coordinadora</option>
+      <option value="Mickey">Mickey</option>
+      <option value="Gabriela">Gabriela</option>
+      <option value="Juan">Juan</option>
+    </select>
+    <button id="btn-login">Entrar</button>
+  </div>
+
+  <div id="app" style="display:none;">
+    <div id="sidebar">
+      <h2>Equipo</h2>
+      <div id="lista-personas">
+        <!-- Se llenará dinámicamente -->
+      </div>
+      <button id="btn-aprobar" style="display:none;">✅ Aprobar Evento</button>
+    </div>
+
+    <div id="calendar"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
