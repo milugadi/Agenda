@@ -4,18 +4,26 @@
   <meta charset="UTF-8">
   <title>Agenda de Personal</title>
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.css" rel="stylesheet">
+
+  <!-- Librerías FullCalendar -->
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.9/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.9/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="login">
     <h2>Ingreso</h2>
     <select id="usuario">
-      <option value="coordinadora">Coordinadora</option>
-      <option value="Mickey">Mickey</option>
-      <option value="Gabriela">Gabriela</option>
-      <option value="Juan">Juan</option>
+      <option value="Mileidy">Mileidy Giraldo (Coordinadora)</option>
+      <option value="Rafael">Rafael Marín</option>
+      <option value="Facundo">Facundo Olivera</option>
+      <option value="Agustin">Agustín Maubrigades</option>
+      <option value="Renzo">Renzo Mancebo</option>
+      <option value="Gustavo">Gustavo Lorenzo</option>
+      <option value="Shahim">Shahim Ale</option>
+      <option value="Osmany">Osmany Valero</option>
     </select>
     <button id="btn-login">Entrar</button>
   </div>
@@ -23,9 +31,7 @@
   <div id="app" style="display:none;">
     <div id="sidebar">
       <h2>Equipo</h2>
-      <div id="lista-personas">
-        <!-- Se llenará dinámicamente -->
-      </div>
+      <div id="lista-personas"></div>
       <button id="btn-aprobar" style="display:none;">✅ Aprobar Evento</button>
     </div>
 
