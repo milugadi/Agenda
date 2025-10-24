@@ -1,4 +1,3 @@
-
 document.getElementById('btn-login').addEventListener('click', () => {
   const usuario = document.getElementById('usuario').value;
   document.getElementById('login').style.display = 'none';
@@ -12,7 +11,6 @@ function iniciarCalendario(usuario) {
   const btnAprobar = document.getElementById('btn-aprobar');
   let eventoSeleccionado = null;
 
-  // Colores de personas
   const personas = {
     'Rafael': '#ffa64d',
     'Facundo': '#90EE90',
@@ -53,13 +51,16 @@ function iniciarCalendario(usuario) {
 
   const calendarEl = document.getElementById('calendar');
 
+  // 🟢 Inicialización del calendario con vista mensual y días en español
   const calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: [ FullCalendar.Interaction, FullCalendar.DayGrid ],
     initialView: 'dayGridMonth',
-    locale: 'es',
-    firstDay: 1, // Lunes
+    firstDay: 1, // lunes
     droppable: true,
     editable: esCoordinadora,
     height: '100%',
+    locale: 'es', // activa idioma español
+    dayHeaderFormat: { weekday: 'long' }, // muestra Lunes, Martes, etc.
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
@@ -69,13 +70,12 @@ function iniciarCalendario(usuario) {
     drop: function(info) {
       const persona = info.draggedEl.dataset.persona;
 
-      // Solo su propio nombre o Mileidy
       if (esCoordinadora || persona === usuario) {
         const tarea = prompt(`¿Qué tarea realizará ${persona}?`);
         if (tarea) {
           let color = personas[persona];
           if (tarea.toLowerCase().includes('licencia')) {
-            color = '#ff0000'; // Licencias en rojo
+            color = '#ff0000'; // licencias en rojo
           }
 
           calendar.addEvent({
@@ -102,7 +102,7 @@ function iniciarCalendario(usuario) {
 
   calendar.render();
 
-  // Aprobación
+  // Botón aprobar evento
   btnAprobar.addEventListener('click', () => {
     if (eventoSeleccionado) {
       eventoSeleccionado.setExtendedProp('estado', 'aprobado');
