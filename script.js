@@ -6,19 +6,24 @@ document.getElementById('btn-login').addEventListener('click', () => {
 });
 
 function iniciarCalendario(usuario) {
-  const esCoordinadora = usuario === 'coordinadora';
+  const esCoordinadora = usuario === 'Mileidy';
   const listaPersonas = document.getElementById('lista-personas');
   const btnAprobar = document.getElementById('btn-aprobar');
   let eventoSeleccionado = null;
 
-  // Colores de personas
+  // Colores personalizados
   const personas = {
-    'Mickey': '#33ccff',
-    'Gabriela': '#ff66b2',
-    'Juan': '#ffa500'
+    'Rafael': '#ffa64d',
+    'Facundo': '#7CFC00',
+    'Agustin': '#800080',
+    'Renzo': '#C8A2C8',
+    'Gustavo': '#A9A9A9',
+    'Shahim': '#A9A9A9',
+    'Osmany': '#A9A9A9',
+    'Mileidy': '#00bfff'
   };
 
-  // Crear lista de personas (draggables)
+  // Crear lista de personas en el panel izquierdo
   listaPersonas.innerHTML = '';
   for (const nombre in personas) {
     if (esCoordinadora || nombre === usuario) {
@@ -45,37 +50,39 @@ function iniciarCalendario(usuario) {
     }
   });
 
-  // Eventos iniciales de ejemplo
-  const eventos = [
-    { title: 'Teletrabajo - Mickey', start: '2025-10-02', backgroundColor: personas['Mickey'], extendedProps: { persona: 'Mickey', estado: 'aprobado' }, classNames: ['aprobado'] },
-    { title: 'Licencia - Gabriela', start: '2025-10-10', backgroundColor: personas['Gabriela'], extendedProps: { persona: 'Gabriela', estado: 'pendiente' }, classNames: ['pendiente'] },
-    { title: 'Viaje - Juan', start: '2025-10-20', backgroundColor: personas['Juan'], extendedProps: { persona: 'Juan', estado: 'aprobado' }, classNames: ['aprobado'] },
-  ];
-
   const calendarEl = document.getElementById('calendar');
 
   const calendar = new FullCalendar.Calendar(calendarEl, {
-    plugins: [ FullCalendarInteraction ],
+    plugins: [ FullCalendarDayGrid, FullCalendarInteraction ],
     initialView: 'dayGridMonth',
-    droppable: true, // permite soltar personas
-    editable: esCoordinadora, // solo coordinadora puede mover eventos
+    firstDay: 1, // Lunes
+    locale: 'es',
+    droppable: true,
+    editable: esCoordinadora,
+    height: '100%',
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    events: eventos,
+    events: [],
 
     drop: function(info) {
       const persona = info.draggedEl.dataset.persona;
 
       // Solo puede crear si es el propio empleado o la coordinadora
       if (esCoordinadora || persona === usuario) {
-        const nota = prompt('Escribe una nota o motivo para el evento:');
-        if (nota) {
-          const color = personas[persona];
+        const tarea = prompt(`¿Qué tarea realizará ${persona}?`);
+        if (tarea) {
+          let color = personas[persona];
+
+          // Si contiene la palabra "licencia", será rojo
+          if (tarea.toLowerCase().includes("licencia")) {
+            color = "#ff0000";
+          }
+
           calendar.addEvent({
-            title: `${nota} - ${persona}`,
+            title: `${tarea} - ${persona}`,
             start: info.dateStr,
             backgroundColor: color,
             extendedProps: { persona, estado: 'pendiente' },
@@ -90,7 +97,7 @@ function iniciarCalendario(usuario) {
     eventClick: function(info) {
       eventoSeleccionado = info.event;
 
-      // Mostrar botón de aprobación solo si es coordinadora y pendiente
+      // Solo Mileidy puede aprobar
       if (esCoordinadora && eventoSeleccionado.extendedProps.estado === 'pendiente') {
         btnAprobar.style.display = 'block';
       } else {
@@ -101,7 +108,7 @@ function iniciarCalendario(usuario) {
 
   calendar.render();
 
-  // Botón para aprobar evento
+  // Botón para aprobar
   btnAprobar.addEventListener('click', () => {
     if (eventoSeleccionado) {
       eventoSeleccionado.setExtendedProp('estado', 'aprobado');
@@ -112,3 +119,4 @@ function iniciarCalendario(usuario) {
     }
   });
 }
+
