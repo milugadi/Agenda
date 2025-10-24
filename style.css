@@ -3,6 +3,7 @@ body {
   flex-direction: column;
   font-family: Arial, sans-serif;
   margin: 0;
+  height: 100vh;
 }
 
 #login {
@@ -12,14 +13,15 @@ body {
 
 #app {
   display: flex;
-  height: 100vh;
+  height: 100%;
 }
 
 #sidebar {
-  width: 220px;
+  width: 240px;
   padding: 15px;
   background: #f7f7f7;
   border-right: 1px solid #ddd;
+  overflow-y: auto;
 }
 
 #sidebar h2 {
@@ -28,26 +30,51 @@ body {
 
 .persona {
   padding: 10px;
-  margin: 5px 0;
+  margin: 6px 0;
   color: white;
   font-weight: bold;
   border-radius: 5px;
   cursor: grab;
+  text-align: center;
 }
 
 .persona:active {
   cursor: grabbing;
 }
 
-/* Colores por persona */
-.persona[data-persona="Mickey"] { background: #33ccff; }
-.persona[data-persona="Gabriela"] { background: #ff66b2; }
-.persona[data-persona="Juan"] { background: #ffa500; }
+/* Colores de cada persona */
+.persona[data-persona="Rafael"] { background: #ffa64d; }     /* naranja claro */
+.persona[data-persona="Facundo"] { background: #7CFC00; }    /* verde manzana */
+.persona[data-persona="Agustin"] { background: #800080; }    /* morado */
+.persona[data-persona="Renzo"] { background: #C8A2C8; }      /* lila */
+.persona[data-persona="Gustavo"] { background: #A9A9A9; }    /* gris */
+.persona[data-persona="Shahim"] { background: #A9A9A9; }     /* gris */
+.persona[data-persona="Osmany"] { background: #A9A9A9; }     /* gris */
+.persona[data-persona="Mileidy"] { background: #00bfff; }    /* celeste */
 
-/* Colores por tipo y estado */
-.fc-event.pendiente { opacity: 0.6; }
+/* Estados de eventos */
+.fc-event.pendiente { opacity: 0.5; }
 .fc-event.aprobado { opacity: 1; }
 
 .fc-event {
   color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 2px;
+  border: none;
+}
+
+#btn-aprobar {
+  margin-top: 15px;
+  width: 100%;
+  padding: 8px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#btn-aprobar:hover {
+  background: #45a049;
 }
