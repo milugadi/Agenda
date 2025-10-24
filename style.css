@@ -1,3 +1,4 @@
+
 body {
   display: flex;
   flex-direction: column;
@@ -44,15 +45,15 @@ body {
 
 /* Colores de cada persona */
 .persona[data-persona="Rafael"] { background: #ffa64d; }     /* naranja claro */
-.persona[data-persona="Facundo"] { background: #7CFC00; }    /* verde manzana */
-.persona[data-persona="Agustin"] { background: #800080; }    /* morado */
+.persona[data-persona="Facundo"] { background: #90EE90; }    /* verde claro */
+.persona[data-persona="Agustin"] { background: #9370DB; }    /* morado claro */
 .persona[data-persona="Renzo"] { background: #C8A2C8; }      /* lila */
 .persona[data-persona="Gustavo"] { background: #A9A9A9; }    /* gris */
 .persona[data-persona="Shahim"] { background: #A9A9A9; }     /* gris */
 .persona[data-persona="Osmany"] { background: #A9A9A9; }     /* gris */
 .persona[data-persona="Mileidy"] { background: #00bfff; }    /* celeste */
 
-/* Estados de eventos */
+/* Eventos */
 .fc-event.pendiente { opacity: 0.5; }
 .fc-event.aprobado { opacity: 1; }
 
