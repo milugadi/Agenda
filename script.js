@@ -1,3 +1,4 @@
+
 document.getElementById('btn-login').addEventListener('click', () => {
   const usuario = document.getElementById('usuario').value;
   document.getElementById('login').style.display = 'none';
@@ -11,11 +12,11 @@ function iniciarCalendario(usuario) {
   const btnAprobar = document.getElementById('btn-aprobar');
   let eventoSeleccionado = null;
 
-  // Colores personalizados
+  // Colores de personas
   const personas = {
     'Rafael': '#ffa64d',
-    'Facundo': '#7CFC00',
-    'Agustin': '#800080',
+    'Facundo': '#90EE90',
+    'Agustin': '#9370DB',
     'Renzo': '#C8A2C8',
     'Gustavo': '#A9A9A9',
     'Shahim': '#A9A9A9',
@@ -23,7 +24,7 @@ function iniciarCalendario(usuario) {
     'Mileidy': '#00bfff'
   };
 
-  // Crear lista de personas en el panel izquierdo
+  // Crear lista lateral
   listaPersonas.innerHTML = '';
   for (const nombre in personas) {
     if (esCoordinadora || nombre === usuario) {
@@ -36,7 +37,7 @@ function iniciarCalendario(usuario) {
     }
   }
 
-  // Hacer las personas arrastrables
+  // Hacer arrastrables las personas
   new FullCalendar.Draggable(listaPersonas, {
     itemSelector: '.persona',
     eventData: function(el) {
@@ -53,10 +54,9 @@ function iniciarCalendario(usuario) {
   const calendarEl = document.getElementById('calendar');
 
   const calendar = new FullCalendar.Calendar(calendarEl, {
-    plugins: [ FullCalendarDayGrid, FullCalendarInteraction ],
     initialView: 'dayGridMonth',
-    firstDay: 1, // Lunes
     locale: 'es',
+    firstDay: 1, // Lunes
     droppable: true,
     editable: esCoordinadora,
     height: '100%',
@@ -66,19 +66,16 @@ function iniciarCalendario(usuario) {
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
     events: [],
-
     drop: function(info) {
       const persona = info.draggedEl.dataset.persona;
 
-      // Solo puede crear si es el propio empleado o la coordinadora
+      // Solo su propio nombre o Mileidy
       if (esCoordinadora || persona === usuario) {
         const tarea = prompt(`¿Qué tarea realizará ${persona}?`);
         if (tarea) {
           let color = personas[persona];
-
-          // Si contiene la palabra "licencia", será rojo
-          if (tarea.toLowerCase().includes("licencia")) {
-            color = "#ff0000";
+          if (tarea.toLowerCase().includes('licencia')) {
+            color = '#ff0000'; // Licencias en rojo
           }
 
           calendar.addEvent({
@@ -93,11 +90,8 @@ function iniciarCalendario(usuario) {
         alert('No puedes agendar eventos para otros empleados.');
       }
     },
-
     eventClick: function(info) {
       eventoSeleccionado = info.event;
-
-      // Solo Mileidy puede aprobar
       if (esCoordinadora && eventoSeleccionado.extendedProps.estado === 'pendiente') {
         btnAprobar.style.display = 'block';
       } else {
@@ -108,7 +102,7 @@ function iniciarCalendario(usuario) {
 
   calendar.render();
 
-  // Botón para aprobar
+  // Aprobación
   btnAprobar.addEventListener('click', () => {
     if (eventoSeleccionado) {
       eventoSeleccionado.setExtendedProp('estado', 'aprobado');
@@ -119,4 +113,3 @@ function iniciarCalendario(usuario) {
     }
   });
 }
-
